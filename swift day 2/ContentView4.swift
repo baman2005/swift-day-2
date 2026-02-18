@@ -13,9 +13,18 @@
 //  Created by applelab03 on 1/27/26.
 //
 import SwiftUI
+struct Cardnames: Identifiable{
+    var id = UUID()
+    var name:String
+    var category:String
+    var isliked:Bool
+}
 var profilelist = ["1", "2", "3", "4", "5", "6", "7", "10", "12"]
 struct ContentView4: View {
-    @State var isliked: Bool = false
+    @State private var card:[Cardnames] = []
+    init(){
+        _card = State(initialValue: newcard())
+    }
     @State var likecount: Int = Int.random(in: 0...1000)
     @State var issave: Bool = false
     @State var savecount: Int = Int.random(in: 0...1000)
@@ -114,7 +123,7 @@ struct ContentView4: View {
     var feddsection: some View {
         ScrollView(.vertical,showsIndicators: false){
             VStack(alignment: .leading,spacing: 12) {
-                ForEach(profilelist, id: \.self) { img in
+                ForEach(card.indices, id: \.self) { img in
                     NavigationLink{
                         profilepage()
                     } label: {
@@ -146,7 +155,7 @@ struct ContentView4: View {
                         .padding(.horizontal)
                     }
                     ZStack{
-                        Image("\(img)")
+                        Image(card[img].name)
                          .resizable()
                          .scaledToFill()
                          .frame(maxHeight: 700)
@@ -154,13 +163,12 @@ struct ContentView4: View {
                     }.padding(EdgeInsets(top: -20, leading: 0, bottom: 20, trailing: 0))
                     HStack{
                         HStack{
-                            Button {
-                                isliked.toggle()
-                                likecount += isliked ? 1 : -1
-                                
-                            } label: {
-                                Image(systemName: isliked ? "heart.fill" : "heart")
-                                    .foregroundColor(isliked ? .red : .black)
+                            Button{
+                                card[img].isliked.toggle()
+                                likecount += card[img].isliked ? 1 : -1
+                            }label: {
+                                Image(systemName: card[img].isliked ? "heart.fill" :"heart")
+                                    .foregroundStyle(Color.black)
                                 Text("\(likecount)")
                                     .foregroundColor(Color.black)
                             }
@@ -196,6 +204,13 @@ struct ContentView4: View {
                 }
             }
         }
+    }
+    func newcard() -> [Cardnames]{
+        var cards: [Cardnames] = []
+        for i in movielist{
+            cards.append(Cardnames(name:  "\(i)", category: "restaurantlist", isliked: false))
+        }
+        return cards
     }
         }
     
