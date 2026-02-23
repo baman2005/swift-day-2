@@ -168,7 +168,7 @@ struct ContentView4: View {
                                 likecount += card[img].isliked ? 1 : -1
                             }label: {
                                 Image(systemName: card[img].isliked ? "heart.fill" :"heart")
-                                    .foregroundStyle(Color.black)
+                                    .foregroundStyle(Color.red)
                                 Text("\(likecount)")
                                     .foregroundColor(Color.black)
                             }

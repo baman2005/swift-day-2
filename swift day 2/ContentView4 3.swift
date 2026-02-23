@@ -3,9 +3,11 @@ import SwiftUI
 
 
 struct messagepage: View {
+    @State private var search:String = ""
     var body: some View {
         NavigationStack{
                 topheadview
+                topnextview
                 bottomview
         }.toolbar(.hidden)
 }
@@ -38,24 +40,11 @@ struct messagepage: View {
         } .padding(EdgeInsets(top: -20, leading: 80, bottom: 0, trailing: 10))
     }
     var topnextview: some View {
-        HStack{
-            ZStack{
-                Rectangle()
-                    .background(Color.blue)
-                    .opacity(0.05)
-                    .cornerRadius(5)
-                    .frame(height: 30)
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.gray)
-                    .offset(x: -165)
-                Text("Search or ask meta ai")
-                    .foregroundColor(.gray)
-                    .offset(x: -73)
-            }
-        } .cornerRadius(30)
-           .ignoresSafeArea()
-           .padding(EdgeInsets(top: -50, leading: 0, bottom: 0, trailing: 0))
-           .listRowSeparator(.hidden)
+        TextField("\(Image(systemName: "magnifyingglass")) search or ask meta ai ", text: $search)
+            .frame(height: 13)
+            .padding()
+            .background(Color(.blue).opacity(0.1))
+            .cornerRadius(58)
     }
     var scrollview: some View {
         ScrollView(.horizontal, showsIndicators: false){
@@ -141,7 +130,7 @@ struct messagepage: View {
         
         List{
             Spacer()
-            topnextview
+            
             scrollview
             primaryview
             

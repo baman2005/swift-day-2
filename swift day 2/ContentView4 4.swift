@@ -5,28 +5,18 @@ struct magnifyingpage: View {
         GridItem(.flexible(minimum: 50, maximum: .infinity),spacing: 1),
         GridItem(.flexible(minimum: 50, maximum: .infinity),spacing: 1),
         GridItem(.flexible(minimum: 50, maximum: .infinity),spacing: 1)]
-    
+    @State private var search:String = ""
     var body: some View {
         Rectangle()
                  .fill(Color.white)
                  .frame(height: 10)
         VStack(alignment: .leading){
           ScrollView{
-                ZStack{
-                    Rectangle()
-                        .background(Color.blue)
-                        .opacity(0.05)
-                        .cornerRadius(10)
-                        .frame(width: 380, height: 30)
-                    HStack{
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                         Text("Search with Meta AI ")
-                            .foregroundColor(.gray)
-                    }.cornerRadius(30)
-                        .ignoresSafeArea()
-                        .padding(EdgeInsets(top: 5, leading: -180, bottom: 0, trailing: 0))
-                    }
+              TextField("\(Image(systemName: "magnifyingglass")) search with meta ai ", text: $search)
+                  .frame(height: 13)
+                  .padding()
+                  .background(Color(.blue).opacity(0.1))
+                  .cornerRadius(58)
                 
                 LazyVGrid(columns: column10, spacing: 2){
                     ForEach(movielist, id: \.self) { img in
