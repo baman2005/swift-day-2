@@ -243,15 +243,19 @@ struct BioSection: View {
                 }
             }
              HStack{
-                ZStack{
-                    Rectangle()
-                        .background(Color.blue)
-                        .opacity(0.05)
-                        .cornerRadius(5)
-                    Text("Edit profile")
-                        .font(.system(size:13, weight: .medium))
-                        .foregroundColor(Color.black)
-                }
+                 NavigationLink{
+                     EditProfileView()
+                 }label: {
+                     ZStack{
+                         Rectangle()
+                             .background(Color.blue)
+                             .opacity(0.05)
+                             .cornerRadius(5)
+                         Text("Edit profile")
+                             .font(.system(size:13, weight: .medium))
+                             .foregroundColor(Color.black)
+                     }
+                 }.foregroundStyle(.primary)
                 ZStack{
                     Rectangle()
                         .background(Color.blue)
